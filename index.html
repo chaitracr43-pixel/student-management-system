@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudentHub - Modern Student Management System</title>
+  <meta name="description"
+    content="Clean, responsive, modern web-based Student Management System for school administrators and teachers to manage student records, track attendance, and record grades." />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+        </div>
+        <div>
+          <div class="sidebar-logo-text">StudentHub</div>
+          <div class="sidebar-logo-sub brand-inst-name">Apex Institute</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main Menu</div>
+
+        <a href="#dashboard" class="nav-item active" data-page="dashboard" id="nav-dashboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1" />
+            <rect width="7" height="5" x="14" y="3" rx="1" />
+            <rect width="7" height="9" x="14" y="12" rx="1" />
+            <rect width="7" height="5" x="3" y="16" rx="1" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="#students" class="nav-item" data-page="students" id="nav-students">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span>Students</span>
+        </a>
+
+        <a href="#add-student" class="nav-item" data-page="add-student" id="nav-add-student">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <line x1="19" x2="19" y1="8" y2="14" />
+            <line x1="22" x2="16" y1="11" y2="11" />
+          </svg>
+          <span>Add Student</span>
+        </a>
+
+        <div class="nav-section-title mt-3">Academics</div>
+
+        <a href="#attendance" class="nav-item" data-page="attendance" id="nav-attendance">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+            <line x1="16" x2="16" y1="2" y2="6" />
+            <line x1="8" x2="8" y1="2" y2="6" />
+            <line x1="3" x2="21" y1="10" y2="10" />
+            <path d="m9 16 2 2 4-4" />
+          </svg>
+          <span>Attendance</span>
+        </a>
+
+        <a href="#grades" class="nav-item" data-page="grades" id="nav-grades">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="6" />
+            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+          </svg>
+          <span>Marks & Grades</span>
+        </a>
+
+        <a href="#departments" class="nav-item" data-page="departments" id="nav-departments">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />
+            <path d="M9 22v-4h6v4" />
+            <path d="M8 6h.01" />
+            <path d="M16 6h.01" />
+            <path d="M12 6h.01" />
+            <path d="M12 10h.01" />
+            <path d="M12 14h.01" />
+            <path d="M16 10h.01" />
+            <path d="M16 14h.01" />
+            <path d="M8 10h.01" />
+            <path d="M8 14h.01" />
+          </svg>
+          <span>Departments</span>
+        </a>
+
+        <div class="nav-section-title mt-3">Administration</div>
+
+        <a href="#settings" class="nav-item" data-page="settings" id="nav-settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <span>Settings & Backup</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-badge-widget">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"
+            alt="Admin" class="user-badge-avatar" />
+          <div>
+            <div class="user-badge-name">Admin Portal</div>
+            <div class="user-badge-role">System Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+
+      <!-- Top Navigation Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="hamburger-btn" id="mobile-hamburger-btn" aria-label="Toggle navigation menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </button>
+          <div class="topbar-titles">
+            <h1 id="topbar-page-title">Dashboard Overview</h1>
+            <p id="topbar-page-subtitle">Academic analytics, metrics, and recent activities</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Global Search -->
+          <div class="global-search-box">
+            <span class="global-search-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </span>
+            <input type="text" id="global-search-input" class="global-search-input"
+              placeholder="Search student name, ID..." autocomplete="off" />
+            <div class="search-results-dropdown" id="global-search-results"></div>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <button class="btn btn-sm btn-primary" id="quick-action-add" title="Quick Enroll Student">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+            <span>Add Student</span>
+          </button>
+
+          <!-- Notifications Button -->
+          <div style="position: relative;">
+            <button class="topbar-btn" id="btn-notifications" aria-label="View notifications">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+              </svg>
+              <span class="notification-badge" id="notifications-count-badge"></span>
+            </button>
+
+            <!-- Notifications Dropdown Menu -->
+            <div class="notifications-dropdown" id="notifications-panel">
+              <div class="notifications-header">
+                <span class="fw-700 text-sm">System Notifications</span>
+                <button class="btn btn-sm btn-outline" id="btn-mark-notifications-read"
+                  style="padding: 0.2rem 0.5rem; font-size: 0.7rem;">Mark all read</button>
+              </div>
+              <div class="notifications-list">
+                <div class="notification-item">
+                  <div class="notif-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm fw-600">Semester Attendance Synced</div>
+                    <div class="text-xs text-muted">All class daily attendance registers are up to date.</div>
+                  </div>
+                </div>
+                <div class="notification-item">
+                  <div class="notif-icon" style="background: var(--warning-light); color: var(--warning);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm fw-600">Grade Submissions Open</div>
+                    <div class="text-xs text-muted">Mid-term evaluation scores can now be submitted.</div>
+                  </div>
+                </div>
+                <div class="notification-item">
+                  <div class="notif-icon" style="background: var(--success-light); color: var(--success);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm fw-600">20 Students Enrolled</div>
+                    <div class="text-xs text-muted">Sample records are populated and ready for test operations.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- Content Views Body -->
+      <main class="content-body">
+
+        <!-- ==================== 1. DASHBOARD VIEW ==================== -->
+        <section class="page-view active" id="dashboard-view">
+
+          <!-- KPI Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Total Students</div>
+                <div class="stat-value text-primary" id="stat-total-students">0</div>
+                <div class="text-xs text-muted mt-1">Enrolled across departments</div>
+              </div>
+              <div class="stat-icon-wrap stat-icon-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Male Students</div>
+                <div class="stat-value" id="stat-male-students">0</div>
+                <div class="text-xs text-muted mt-1">Registered male students</div>
+              </div>
+              <div class="stat-icon-wrap stat-icon-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Female Students</div>
+                <div class="stat-value" id="stat-female-students">0</div>
+                <div class="text-xs text-muted mt-1">Registered female students</div>
+              </div>
+              <div class="stat-icon-wrap stat-icon-purple">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Avg Attendance</div>
+                <div class="stat-value text-success" id="stat-avg-attendance">0%</div>
+                <div class="text-xs text-muted mt-1">Overall campus attendance</div>
+              </div>
+              <div class="stat-icon-wrap stat-icon-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                  <line x1="16" x2="16" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="2" y2="6" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                  <path d="m9 16 2 2 4-4" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Average Marks</div>
+                <div class="stat-value text-warning" id="stat-avg-marks">0%</div>
+                <div class="text-xs text-muted mt-1">Institution academic average</div>
+              </div>
+              <div class="stat-icon-wrap stat-icon-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="charts-grid">
+            <div class="card chart-card">
+              <div class="card-header">
+                <h3 class="card-title">Students by Department</h3>
+                <span class="badge badge-neutral">Distribution</span>
+              </div>
+              <div class="card-body">
+                <div class="chart-wrapper">
+                  <canvas id="chart-departments"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="card chart-card">
+              <div class="card-header">
+                <h3 class="card-title">Attendance Overview</h3>
+                <span class="badge badge-neutral">Tier Distribution</span>
+              </div>
+              <div class="card-body">
+                <div class="chart-wrapper">
+                  <canvas id="chart-attendance"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic Performance Distribution Chart -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h3 class="card-title">Academic Performance & Grade Distribution</h3>
+              <span class="badge badge-primary">Grading Scale (A+ to F)</span>
+            </div>
+            <div class="card-body">
+              <div class="chart-wrapper" style="height: 240px;">
+                <canvas id="chart-grades"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recently Added Students Table -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Recently Added Students</h3>
+                <p class="text-xs text-muted mt-1">Latest registered students in the system</p>
+              </div>
+              <button class="btn btn-sm btn-outline" onclick="App.navigate('students')">
+                View All Directory &rarr;
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Department</th>
+                    <th>Attendance</th>
+                    <th>Average Marks</th>
+                    <th>Status</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-table">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 2. STUDENTS VIEW ==================== -->
+        <section class="page-view" id="students-view">
+
+          <!-- Toolbar & Filters -->
+          <div class="toolbar-card">
+            <div class="toolbar-flex">
+              <div class="toolbar-filters">
+                <!-- Search Input -->
+                <div class="search-input-wrap">
+                  <span class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="11" cy="11" r="8" />
+                      <path d="m21 21-4.3-4.3" />
+                    </svg>
+                  </span>
+                  <input type="text" id="student-search-input" class="form-control"
+                    placeholder="Search by name, ID, email..." />
+                </div>
+
+                <!-- Department Filter -->
+                <select id="filter-department" class="form-control" style="max-width: 200px;">
+                  <option value="all">All Departments</option>
+                </select>
+
+                <!-- Gender Filter -->
+                <select id="filter-gender" class="form-control" style="max-width: 140px;">
+                  <option value="all">All Genders</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+
+                <!-- Status Filter -->
+                <select id="filter-status" class="form-control" style="max-width: 140px;">
+                  <option value="all">All Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+
+                <!-- Sort By -->
+                <select id="sort-students" class="form-control" style="max-width: 180px;">
+                  <option value="name_asc">Sort: Name (A-Z)</option>
+                  <option value="name_desc">Sort: Name (Z-A)</option>
+                  <option value="marks_desc">Sort: Highest Marks</option>
+                  <option value="marks_asc">Sort: Lowest Marks</option>
+                  <option value="attendance_desc">Sort: Highest Attendance</option>
+                  <option value="attendance_asc">Sort: Lowest Attendance</option>
+                  <option value="id_asc">Sort: Student ID</option>
+                </select>
+              </div>
+
+              <!-- Action Group -->
+              <div class="d-flex align-center gap-2">
+                <button class="btn btn-outline" id="btn-export-students-csv" title="Export to CSV Spreadsheet">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" x2="12" y1="15" y2="3" />
+                  </svg>
+                  <span>Export CSV</span>
+                </button>
+                <button class="btn btn-primary" onclick="App.navigate('add-student')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                  </svg>
+                  <span>Add Student</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Students Data Table Card -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table" id="students-directory-table">
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Class / Department</th>
+                    <th>Phone</th>
+                    <th>Attendance</th>
+                    <th>Average Marks</th>
+                    <th>Status</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="students-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination Bar -->
+            <div class="pagination-container">
+              <div class="d-flex align-center gap-3">
+                <span class="text-sm text-muted" id="students-count-summary">Showing 0-0 of 0 students</span>
+                <div class="d-flex align-center gap-2">
+                  <label class="text-xs text-muted" for="table-page-size">Per page:</label>
+                  <select id="table-page-size" class="form-control"
+                    style="width: auto; padding: 0.2rem 0.5rem; font-size: 0.78rem;">
+                    <option value="5">5</option>
+                    <option value="8" selected>8</option>
+                    <option value="12">12</option>
+                    <option value="20">20</option>
+                  </select>
+                </div>
+              </div>
+              <div class="pagination-buttons" id="students-pagination">
+                <!-- Pagination buttons rendered here -->
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==================== 3. ADD / EDIT STUDENT VIEW ==================== -->
+        <section class="page-view" id="add-student-view">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title" id="student-form-page-title">Add New Student</h3>
+                <p class="text-xs text-muted mt-1">Fill out the student details below. Fields marked with an asterisk
+                  (*) are required.</p>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="App.navigate('students')">
+                &larr; Back to Students List
+              </button>
+            </div>
+
+            <div class="card-body">
+              <form id="student-record-form" autocomplete="off">
+
+                <!-- Avatar & Identity Section -->
+                <div class="d-flex align-center gap-4 mb-4 pb-4 border-bottom flex-wrap">
+                  <div>
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=new" alt="Avatar Preview"
+                      id="form-avatar-preview" class="profile-avatar-img" />
+                  </div>
+                  <div style="flex: 1; min-width: 250px;">
+                    <label class="form-label" for="student-form-avatar">Profile Photo URL or Avatar</label>
+                    <input type="text" id="student-form-avatar" class="form-control"
+                      placeholder="https://... or choose a preset below" />
+                    <div class="d-flex align-center gap-2 mt-2 flex-wrap">
+                      <span class="text-xs text-muted">Quick Presets:</span>
+                      <button type="button" class="btn btn-sm btn-outline avatar-preset-btn" data-seed="Alex">Avatar
+                        1</button>
+                      <button type="button" class="btn btn-sm btn-outline avatar-preset-btn" data-seed="Sophia">Avatar
+                        2</button>
+                      <button type="button" class="btn btn-sm btn-outline avatar-preset-btn" data-seed="Marcus">Avatar
+                        3</button>
+                      <button type="button" class="btn btn-sm btn-outline avatar-preset-btn" data-seed="Emily">Avatar
+                        4</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Form Fields Grid -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label required" for="student-form-id">Student ID</label>
+                    <input type="text" id="student-form-id" class="form-control font-mono" placeholder="e.g. STU-1021"
+                      required />
+                    <div class="form-help">Unique identification number</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label required" for="student-form-firstname">First Name</label>
+                    <input type="text" id="student-form-firstname" class="form-control" placeholder="e.g. Liam"
+                      required />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label required" for="student-form-lastname">Last Name</label>
+                    <input type="text" id="student-form-lastname" class="form-control" placeholder="e.g. Smith"
+                      required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="student-form-dob">Date of Birth</label>
+                    <input type="date" id="student-form-dob" class="form-control" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="student-form-gender">Gender</label>
+                    <select id="student-form-gender" class="form-control">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label required" for="student-form-dept">Class / Department</label>
+                    <select id="student-form-dept" class="form-control" required>
+                      <option value="">Select Department</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label required" for="student-form-email">Email Address</label>
+                    <input type="email" id="student-form-email" class="form-control"
+                      placeholder="e.g. liam.smith@campus.edu" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="student-form-phone">Phone Number</label>
+                    <input type="tel" id="student-form-phone" class="form-control"
+                      placeholder="e.g. +1 (555) 000-0000" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="student-form-enrollment">Enrollment Date</label>
+                    <input type="date" id="student-form-enrollment" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="student-form-address">Residential Address</label>
+                  <input type="text" id="student-form-address" class="form-control"
+                    placeholder="Street address, City, State, ZIP" />
+                </div>
+
+                <!-- Guardian & Status Information -->
+                <div class="form-row mt-4 pt-3 border-top">
+                  <div class="form-group">
+                    <label class="form-label" for="student-form-guardian-name">Parent / Guardian Name</label>
+                    <input type="text" id="student-form-guardian-name" class="form-control"
+                      placeholder="e.g. John Smith" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="student-form-guardian-phone">Parent / Guardian Phone</label>
+                    <input type="tel" id="student-form-guardian-phone" class="form-control"
+                      placeholder="e.g. +1 (555) 111-2222" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="student-form-status">Student Status</label>
+                    <select id="student-form-status" class="form-control">
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Action Footer -->
+                <div class="d-flex justify-between align-center mt-5 pt-3 border-top flex-wrap gap-2">
+                  <button type="button" class="btn btn-outline" id="btn-reset-form">
+                    Reset Form
+                  </button>
+                  <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-outline" onclick="App.navigate('students')">
+                      Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="btn-submit-student">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <line x1="19" x2="19" y1="8" y2="14" />
+                        <line x1="22" x2="16" y1="11" y2="11" />
+                      </svg>
+                      <span>Save Student</span>
+                    </button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 4. ATTENDANCE VIEW ==================== -->
+        <section class="page-view" id="attendance-view">
+
+          <!-- Controls Toolbar -->
+          <div class="toolbar-card">
+            <div class="toolbar-flex">
+              <div class="toolbar-filters">
+                <div class="form-group m-0">
+                  <label class="form-label" for="attendance-date-picker">Date</label>
+                  <input type="date" id="attendance-date-picker" class="form-control" style="min-width: 160px;" />
+                </div>
+
+                <div class="form-group m-0">
+                  <label class="form-label" for="attendance-dept-filter">Department / Class</label>
+                  <select id="attendance-dept-filter" class="form-control" style="min-width: 200px;">
+                    <option value="all">All Departments</option>
+                  </select>
+                </div>
+
+                <div class="form-group m-0">
+                  <label class="form-label" for="attendance-search-input">Search Student</label>
+                  <input type="text" id="attendance-search-input" class="form-control"
+                    placeholder="Filter student in class..." />
+                </div>
+              </div>
+
+              <!-- Batch Action Buttons -->
+              <div class="d-flex align-center gap-2 mt-2">
+                <button type="button" class="btn btn-sm btn-outline" id="btn-mark-all-present">
+                  Mark All Present
+                </button>
+                <button type="button" class="btn btn-sm btn-outline" id="btn-mark-all-late">
+                  Mark All Late
+                </button>
+                <button type="button" class="btn btn-sm btn-outline" id="btn-mark-all-absent">
+                  Mark All Absent
+                </button>
+                <button type="button" class="btn btn-sm btn-success" id="btn-save-attendance">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                  </svg>
+                  <span>Save Attendance</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attendance Summary Stats Strip -->
+          <div class="stats-grid mb-4">
+            <div class="stat-card" style="padding: 1rem 1.25rem;">
+              <div>
+                <div class="stat-label">Total In Register</div>
+                <div class="stat-value fs-4" id="att-stat-total">0</div>
+              </div>
+            </div>
+            <div class="stat-card" style="padding: 1rem 1.25rem;">
+              <div>
+                <div class="stat-label">Present</div>
+                <div class="stat-value fs-4 text-success" id="att-stat-present">0</div>
+              </div>
+            </div>
+            <div class="stat-card" style="padding: 1rem 1.25rem;">
+              <div>
+                <div class="stat-label">Late</div>
+                <div class="stat-value fs-4 text-warning" id="att-stat-late">0</div>
+              </div>
+            </div>
+            <div class="stat-card" style="padding: 1rem 1.25rem;">
+              <div>
+                <div class="stat-label">Absent</div>
+                <div class="stat-value fs-4 text-danger" id="att-stat-absent">0</div>
+              </div>
+            </div>
+            <div class="stat-card" style="padding: 1rem 1.25rem;">
+              <div>
+                <div class="stat-label">Daily Presence</div>
+                <div class="stat-value fs-4 text-primary" id="att-stat-percentage">0%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attendance Register Table -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Student</th>
+                    <th>Department</th>
+                    <th>Overall Record</th>
+                    <th>Mark Attendance</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==================== 5. MARKS & GRADES VIEW ==================== -->
+        <section class="page-view" id="grades-view">
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h3 class="card-title">Record Examination Marks</h3>
+              <span class="badge badge-primary">Auto-computed GPA & Grades</span>
+            </div>
+            <div class="card-body">
+              <form id="record-marks-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label required" for="grades-student-select">Select Student</label>
+                    <select id="grades-student-select" class="form-control" required>
+                      <option value="">-- Choose a Student --</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label required" for="grades-subject-select">Select Subject</label>
+                    <select id="grades-subject-select" class="form-control" required>
+                      <option value="">-- Choose Subject --</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label required" for="grades-score-input">Marks (0 - 100)</label>
+                    <input type="number" id="grades-score-input" class="form-control font-mono" min="0" max="100"
+                      placeholder="e.g. 88" required />
+                  </div>
+                </div>
+
+                <div class="d-flex justify-between align-center flex-wrap gap-2 pt-2 border-top">
+                  <div id="live-grade-preview">
+                    <span class="text-muted text-sm">Enter marks to see live grade preview</span>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14" />
+                      <path d="M12 5v14" />
+                    </svg>
+                    <span>Save Subject Mark</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Selected Student Grade Card Container -->
+          <div id="selected-student-grades-container">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Overall Class Gradebook Summary -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Class Gradebook Summary</h3>
+              <span class="badge badge-neutral">All Students</span>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Department</th>
+                    <th>Subjects Recorded</th>
+                    <th>Average Score</th>
+                    <th>Grade</th>
+                    <th>GPA</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="grades-class-summary-table">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==================== 6. DEPARTMENTS VIEW ==================== -->
+        <section class="page-view" id="departments-view">
+          <div class="departments-grid" id="departments-grid-container">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- ==================== 7. SETTINGS VIEW ==================== -->
+        <section class="page-view" id="settings-view">
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h3 class="card-title">Institution Profile</h3>
+              <p class="text-xs text-muted">Manage general university or school settings</p>
+            </div>
+            <div class="card-body">
+              <form id="settings-general-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="settings-inst-name">Institution Name</label>
+                    <input type="text" id="settings-inst-name" class="form-control"
+                      value="Apex Institute of Technology" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="settings-inst-code">Institution Code</label>
+                    <input type="text" id="settings-inst-code" class="form-control font-mono" value="APEX-2026" />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="settings-academic-year">Academic Year</label>
+                    <input type="text" id="settings-academic-year" class="form-control" value="2025-2026" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="settings-current-sem">Current Semester</label>
+                    <input type="text" id="settings-current-sem" class="form-control" value="Fall Semester" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="settings-passing-score">Minimum Passing Score (%)</label>
+                    <input type="number" id="settings-passing-score" class="form-control font-mono" value="50" min="30"
+                      max="100" />
+                  </div>
+                </div>
+
+                <div class="text-right pt-2 border-top">
+                  <button type="submit" class="btn btn-primary">
+                    Save Institution Settings
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Data Backup & Reset Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Data Management & Backup</h3>
+              <p class="text-xs text-muted">Export, import, or reset local database storage</p>
+            </div>
+            <div class="card-body">
+              <div class="d-flex align-center justify-between py-3 border-bottom flex-wrap gap-2">
+                <div>
+                  <div class="fw-600">Export Complete System Backup</div>
+                  <div class="text-sm text-muted">Download all student profiles, attendance, and marks as a JSON file.
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline" id="btn-export-full-backup">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" x2="12" y1="15" y2="3" />
+                  </svg>
+                  <span>Export JSON Backup</span>
+                </button>
+              </div>
+
+              <div class="d-flex align-center justify-between py-3 border-bottom flex-wrap gap-2">
+                <div>
+                  <div class="fw-600">Restore / Import Data</div>
+                  <div class="text-sm text-muted">Upload a previous JSON backup file to restore student data.</div>
+                </div>
+                <div>
+                  <label for="import-file-input" class="btn btn-outline" style="cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="17 8 12 3 7 8" />
+                      <line x1="12" x2="12" y1="3" y2="15" />
+                    </svg>
+                    <span>Import JSON</span>
+                  </label>
+                  <input type="file" id="import-file-input" accept=".json" style="display: none;" />
+                </div>
+              </div>
+
+              <div class="d-flex align-center justify-between py-3 flex-wrap gap-2">
+                <div>
+                  <div class="fw-600 text-danger">Reset to Default Sample Data</div>
+                  <div class="text-sm text-muted">Restore the initial 20 sample students and standard configuration.
+                  </div>
+                </div>
+                <button type="button" class="btn btn-danger" id="btn-factory-reset">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                    <path d="M21 3v5h-5" />
+                    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+                    <path d="M8 16H3v5" />
+                  </svg>
+                  <span>Reset Data</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Detailed Student Profile Modal -->
+  <div class="modal-wrapper" id="view-student-modal">
+    <div class="modal-backdrop" onclick="UI.closeModal('view-student-modal')"></div>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">Student Profile</h3>
+        <button class="modal-close" onclick="UI.closeModal('view-student-modal')">&times;</button>
+      </div>
+      <div class="modal-body" id="profile-modal-content">
+        <!-- Dynamically rendered -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="profile-modal-print-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect width="12" height="8" x="6" y="14" />
+          </svg>
+          <span>Print Profile</span>
+        </button>
+        <button type="button" class="btn btn-outline" id="profile-modal-edit-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+            <path d="m15 5 4 4" />
+          </svg>
+          <span>Edit Student</span>
+        </button>
+        <button type="button" class="btn btn-danger" id="profile-modal-delete-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18" />
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+          </svg>
+          <span>Delete Student</span>
+        </button>
+        <button type="button" class="btn btn-outline" onclick="UI.closeModal('view-student-modal')">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Safe Confirmation Modal -->
+  <div class="modal-wrapper" id="confirm-modal">
+    <div class="modal-backdrop" onclick="UI.closeModal('confirm-modal')"></div>
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="confirm-modal-title">Confirm Action</h3>
+        <button class="modal-close" onclick="UI.closeModal('confirm-modal')">&times;</button>
+      </div>
+      <div class="modal-body" id="confirm-modal-message">
+        Are you sure you want to proceed?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="confirm-modal-cancel"
+          onclick="UI.closeModal('confirm-modal')">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger" id="confirm-modal-ok">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/components/dashboard.js"></script>
+  <script src="js/components/students.js"></script>
+  <script src="js/components/studentForm.js"></script>
+  <script src="js/components/studentProfile.js"></script>
+  <script src="js/components/attendance.js"></script>
+  <script src="js/components/grades.js"></script>
+  <script src="js/components/departments.js"></script>
+  <script src="js/components/settings.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>
